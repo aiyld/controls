@@ -10,13 +10,18 @@ export default class CircleButton extends Component {
 
     render(){
         let {src, showDefaultImg, className,
-             text} = this.props;
+             text, height} = this.props;
         if(showDefaultImg){
             src = require("../img/white_search.png");
         }
 
+        let img;
+        if(src){
+            img = <img height={height} className="" src={src}/>;
+        }
+
         return <a className={"ld ld-circlebutton "+className}>
-            <img className=""/>{text}
+            {img}{text}
         </a>
     }
 }
@@ -36,4 +41,5 @@ CircleButton.defaultProps = {
     src: "",
     className: "",
     showDefaultImg: false,
+    height: "28"
 }

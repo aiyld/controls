@@ -19,19 +19,19 @@ export default class Tab extends Component {
             <li className="active">
                 <a>
                     <i className="iconfont ic-articles"></i>
-                     文章
+                     最新
                 </a>
             </li>
             <li className="">
                 <a>
                     <i className="iconfont ic-feed"></i>
-                     课件
+                     文章
                 </a>
             </li>
             <li className="">
                 <a>
                     <i className="iconfont ic-latestcomments"></i>
-                     最新评论
+                     课件
                 </a>
             </li>
             <li className="">

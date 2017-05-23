@@ -22,15 +22,9 @@
             bottom: 0;
             width: 100%;
             max-width: 320px;
-            background: #cccccc;
         }
 
-        .show{
-            -webkit-animation: popani .2s;
-            -moz-animation: popani .2s;
-            -ms-animation: popani .2s;
-            -o-animation: popani .2s;
-            animation: popani .2s;
+        .mode{
             -webkit-animation-fill-mode: forwards;
             -moz-animation-fill-mode: forwards;
             -ms-animation-fill-mode: forwards;
@@ -39,10 +33,33 @@
             -webkit-animation-play-state : running;
         }
 
-        @keyframes popani
+        .show{
+            -webkit-animation: popin .2s;
+            -moz-animation: popin .2s;
+            -ms-animation: popin .2s;
+            -o-animation: popin .2s;
+            animation: popin .2s;
+            .mode;
+        }
+
+        .hide{
+            -webkit-animation: popout .2s;
+            -moz-animation: popout .2s;
+            -ms-animation: popout .2s;
+            -o-animation: popout .2s;
+            animation: popout .2s;
+            .mode;
+        }
+
+        @keyframes popin
         {
             0% {right: -320px}
             100% {right:0;}
+        }
+        @keyframes popout
+        {
+            0% {right: 0;}
+            100% {right: -320px;}
         }
     }
 }

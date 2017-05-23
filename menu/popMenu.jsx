@@ -54,12 +54,14 @@ export default class PopMenu extends Component {
         let {visible} = this.state;
         let className = "";
         if(visible){
-            className = "show"
+            className = "show";
+        }else if(this.refs.pop && this.refs.pop.className.indexOf("show") > -1){
+            className = "hide";
         }
 
         return <div ref="root" className="ld ld-pm">
             <button className="menu-btn" onClick={this.toggleMenu.bind(this)}></button>
-            <div className={"pop "+className}>
+            <div ref="pop" className={"pop "+className}>
                 {this.props.children}
             </div>
         </div>

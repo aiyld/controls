@@ -24,5 +24,25 @@
             max-width: 320px;
             background: #cccccc;
         }
+
+        .show{
+            -webkit-animation: popani .2s;
+            -moz-animation: popani .2s;
+            -ms-animation: popani .2s;
+            -o-animation: popani .2s;
+            animation: popani .2s;
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            -ms-animation-fill-mode: forwards;
+            -o-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-play-state : running;
+        }
+
+        @keyframes popani
+        {
+            0% {right: -320px}
+            100% {right:0;}
+        }
     }
 }

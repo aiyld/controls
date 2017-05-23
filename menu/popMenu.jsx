@@ -12,13 +12,40 @@ export default class PopMenu extends Component {
         this.state={
             visible: false,  //是否显示弹出菜单
         }
+
+        this.bodyClickBind = this.bodyClick.bind(this);
     }
 
     componentDidMount(){
+        document.body.addEventListener('touchstart', this.bodyClickBind, false);
+        document.body.addEventListener('click', this.bodyClickBind, false);
     }
 
-    toggleMenu(){
+    componentWillUnmount(){
+        document.body.removeEventListener('click', this.bodyClickBind, false);
+        document.body.removeEventListener('touchstart', this.bodyClickBind, false);
+    }
+
+    //点击非本窗体则隐藏本窗体
+    bodyClick(e){
+        e = e || window.event;
+        let target = e.target || e.srcElement;
+        let keyboardBody = this.refs.root;
+        let isChild = true;
+        if(keyboardBody){
+            isChild = keyboardBody.contains(target);
+        }
+        if(!isChild){
+            this.toggleMenu(false);
+        }
+    }
+
+    //控制切换菜单
+    toggleMenu(status){
         let {visible} = this.state;
+        if(status === false || status === true){
+            visible = !status;
+        }
         this.setState({visible: !visible});
     }
 
@@ -27,10 +54,10 @@ export default class PopMenu extends Component {
         let {visible} = this.state;
         let className = "";
         if(visible){
-
+            className = "show"
         }
 
-        return <div className="ld ld-pm">
+        return <div ref="root" className="ld ld-pm">
             <button className="menu-btn" onClick={this.toggleMenu.bind(this)}></button>
             <div className={"pop "+className}>
                 {this.props.children}

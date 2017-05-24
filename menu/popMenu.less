@@ -33,6 +33,17 @@
             bottom: 0;
             width: 100%;
             max-width: @width;
+            overflow-y: auto;
+            background: transparent;
+        }
+
+        .cover{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.24) !important;
         }
 
         .show{
@@ -74,7 +85,6 @@
 }
 
 .bodyout{
-    background: rgba(0, 0, 0, 0.24) !important;
     -webkit-animation: bodyout @span;
     -moz-animation: bodyout @span;
     -ms-animation: bodyout @span;

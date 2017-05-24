@@ -37,7 +37,7 @@ export default class PopMenu extends Component {
         if(keyboardBody){
             isChild = keyboardBody.contains(target);
         }
-        if(!isChild){
+        if(!isChild || target == this.refs.cover){
             this.toggleMenu(false);
         }
     }
@@ -91,9 +91,14 @@ export default class PopMenu extends Component {
             className = "hide";
             this.animateParent(false);
         }
+        let cover;
+        if(visible){
+            cover = <div ref="cover" className="cover"></div>
+        }
 
         return <div ref="root" className="ld ld-pm">
             <button className="menu-btn" onClick={this.toggleMenu.bind(this)}></button>
+            {cover}
             <div ref="pop" className={"pop "+className}>
                 {this.props.children}
             </div>

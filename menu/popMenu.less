@@ -1,3 +1,14 @@
+@width: 280px;
+@span: .2s;
+
+.animation-mode{
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-play-state : running;
+}
 
 .ld{
     &.ld-pm{
@@ -17,49 +28,66 @@
 
         .pop{
             position: fixed;
-            right: -320px;
+            right: -1 * @width;
             top: 0;
             bottom: 0;
             width: 100%;
-            max-width: 320px;
-        }
-
-        .mode{
-            -webkit-animation-fill-mode: forwards;
-            -moz-animation-fill-mode: forwards;
-            -ms-animation-fill-mode: forwards;
-            -o-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
-            -webkit-animation-play-state : running;
+            max-width: @width;
         }
 
         .show{
-            -webkit-animation: popin .2s;
-            -moz-animation: popin .2s;
-            -ms-animation: popin .2s;
-            -o-animation: popin .2s;
-            animation: popin .2s;
-            .mode;
+            -webkit-animation: popin @span;
+            -moz-animation: popin @span;
+            -ms-animation: popin @span;
+            -o-animation: popin @span;
+            animation: popin @span;
+            .animation-mode;
         }
 
         .hide{
-            -webkit-animation: popout .2s;
-            -moz-animation: popout .2s;
-            -ms-animation: popout .2s;
-            -o-animation: popout .2s;
-            animation: popout .2s;
-            .mode;
+            -webkit-animation: popout @span;
+            -moz-animation: popout @span;
+            -ms-animation: popout @span;
+            -o-animation: popout @span;
+            animation: popout @span;
+            .animation-mode;
         }
 
-        @keyframes popin
-        {
-            0% {right: -320px}
-            100% {right:0;}
+        @keyframes popin{
+            0% {right: -1 * @width}
+            100% {right: 0;}
         }
-        @keyframes popout
-        {
+        @keyframes popout{
             0% {right: 0;}
-            100% {right: -320px;}
+            100% {right: -1 * @width;}
         }
     }
+}
+
+.bodyin{
+    -webkit-animation: bodyin @span;
+    -moz-animation: bodyin @span;
+    -ms-animation: bodyin @span;
+    -o-animation: bodyin @span;
+    animation: bodyin @span;
+    .animation-mode;
+}
+
+.bodyout{
+    background: rgba(0, 0, 0, 0.24) !important;
+    -webkit-animation: bodyout @span;
+    -moz-animation: bodyout @span;
+    -ms-animation: bodyout @span;
+    -o-animation: bodyout @span;
+    animation: bodyout @span;
+    .animation-mode;
+}
+
+@keyframes bodyin{
+    0% {margin-left: -1 * @width}
+    100% {margin-left: 0;}
+}
+@keyframes bodyout{
+    0% {margin-left: 0}
+    100% {margin-left: -1 * @width;}
 }

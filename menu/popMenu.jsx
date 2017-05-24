@@ -14,11 +14,13 @@ export default class PopMenu extends Component {
         }
 
         this.bodyClickBind = this.bodyClick.bind(this);
+        this.originalClass = "";
     }
 
     componentDidMount(){
         document.body.addEventListener('touchstart', this.bodyClickBind, false);
         document.body.addEventListener('click', this.bodyClickBind, false);
+        this.originalClass = document.body.className;
     }
 
     componentWillUnmount(){
@@ -49,14 +51,43 @@ export default class PopMenu extends Component {
         this.setState({visible: !visible});
     }
 
+    //驱动父组件动画
+    animateParent(isOut){
+        if(!this.props.getElements){
+            return;
+        }
+
+        let elements = this.props.getElements();
+        let setAnimate = (ele, outStatus)=>{
+            ele.className = ele.className || "";
+            if(outStatus){
+                ele.className = ele.className.replace(/bodyin/g, "").trim();
+                ele.className += " bodyout";
+            }else{
+                ele.className = ele.className.replace(/bodyout/g, "").trim();
+                ele.className += " bodyin";
+            }
+        };
+        if(elements instanceof Array){
+            for (let i = 0; i < elements.length; i++) {
+                let item = elements[i];
+                setAnimate(item, isOut);
+            }
+        }else if(elements){
+            setAnimate(elements, isOut);
+        }
+    }
+
     render(){
         let pop;
         let {visible} = this.state;
         let className = "";
         if(visible){
             className = "show";
+            this.animateParent(true);
         }else if(this.refs.pop && this.refs.pop.className.indexOf("show") > -1){
             className = "hide";
+            this.animateParent(false);
         }
 
         return <div ref="root" className="ld ld-pm">
@@ -69,18 +100,10 @@ export default class PopMenu extends Component {
 }
 
 PopMenu.propTypes = {
-    items: PropTypes.array,                        //菜单项 menu items
-                                                   //               [
-                                                   //                   {
-                                                   //                       src: "", string or Object,
-                                                   //                   }
-                                                   //               ]
-    index: PropTypes.number,                       //默认选中的索引 The index of item, which is selcted by default
-    onSelectChange: PropTypes.func,                //选择更改事件 Selection change event
+    getElements: PropTypes.func,                //Get elements witch would be push to left
+                                                //获取需要被动画推至左边的组件
 }
 
 PopMenu.defaultProps = {
-    items: [],
-    index: -1,
-    onSelectChange: null,
+    getElements: null,
 }

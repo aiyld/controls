@@ -58,25 +58,27 @@ export default class PopMenu extends Component {
         }
 
         let elements = this.props.getElements();
-        let setAnimate = (ele, outStatus)=>{
-            ele.className = ele.className || "";
-            if(outStatus){
-                ele.className = ele.className.replace(/bodyin/g, "").trim();
-                ele.className += " bodyout";
-            }else{
-                ele.className = ele.className.replace(/bodyout/g, "").trim();
-                ele.className += " bodyin";
-            }
-        };
         if(elements instanceof Array){
             for (let i = 0; i < elements.length; i++) {
                 let item = elements[i];
-                setAnimate(item, isOut);
+                this.setAnimate(item, isOut);
             }
         }else if(elements){
-            setAnimate(elements, isOut);
+            this.setAnimate(elements, isOut);
         }
     }
+
+    //设置动画
+    setAnimate(ele, outStatus){
+        ele.className = ele.className || "";
+        if(outStatus){
+            ele.className = ele.className.replace(/bodyin/g, "").trim();
+            ele.className += " bodyout";
+        }else{
+            ele.className = ele.className.replace(/bodyout/g, "").trim();
+            ele.className += " bodyin";
+        }
+    };
 
     render(){
         let pop;

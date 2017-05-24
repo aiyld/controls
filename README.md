@@ -1,4 +1,6 @@
 # controls
 React controls
 
-YLD design for Company website project
+Samyoc YLD Product
+
+For more infomation, please refer: http://controls.samyoc.com

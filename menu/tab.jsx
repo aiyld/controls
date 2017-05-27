@@ -15,7 +15,7 @@ export default class Tab extends Component {
     }
 
     render(){
-        return <ul className="ld ld-tab">
+        return <ul className="ld ld-tab flexshow">
             <li className="active">
                 <a>
                     <i className="iconfont ic-articles"></i>

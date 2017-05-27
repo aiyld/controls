@@ -1,4 +1,4 @@
-export const Util = {
+export default {
     /**
      * 获取url或者自定义的hash字符串中的参数信息
      *
@@ -45,5 +45,53 @@ export const Util = {
         text = null; parser = null;
 
         return value;
+    },
+
+    /**
+     * Get params from Url
+     */
+    getParamsFromUrl:function () {
+        var result = {};
+        var fistPart = decodeURI(location.search);
+        var hashPart = decodeURI(location.hash);
+
+        var paramsStr = fistPart.split("?");
+        var hashParas = hashPart.split("?");
+
+        paramsStr.push(hashParas[1]);
+
+        if (paramsStr != null) {
+            for (var i = 0; i < paramsStr.length; i++) {
+                var paramItem = paramsStr[i];
+                var paramArray = paramItem.split("&");
+
+                for (var j = 0; j < paramArray.length; j++) {
+                    if(paramArray[j].indexOf("=")>0){
+                        var paramTarget = paramArray[j].split("=");
+                        result[paramTarget[0]] = paramTarget[1];
+                    }
+                }
+            }
+        }
+
+        return result;
+    },
+
+    /**
+     * Get JSON parameters from url
+     */
+    getJsonParamFromUrl: function(field){
+        var result = {};
+        try{
+            var params = this.getParamsFromUrl();
+            field = field || "param";
+            params[field] = params[field].replace(/%3A/g,":");
+            params[field] = params[field].replace(/%2C/g,",");
+            return JSON.parse(params[field]);
+        }catch(e){
+            console.log("Error: getJsonParamFromUrl", {color: "red"});
+        }
+
+        return result;
     },
 }

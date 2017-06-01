@@ -9,37 +9,60 @@ import "./tab.less";
 export default class Tab extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            selectIndex: -1,
+        };
+        this.onSelectChangeHandler.bind(this);
     }
 
     componentDidMount(){
+
+    }
+
+    onSelectChangeHandler(item, i){
+        let {onSelectChange} = this.props;
+        if(onSelectChange){
+            onSelectChange(item, i);
+        }
+
+        this.setState({selectIndex: i});
     }
 
     render(){
+        let {items, index} = this.props;
+        let {selectIndex} = this.state;
+
+        items = items || [];
+
         return <ul className="ld ld-tab flexshow">
-            <li className="active">
-                <a>
-                    <i className="iconfont ic-articles"></i>
-                     最新
-                </a>
-            </li>
-            <li className="">
-                <a>
-                    <i className="iconfont ic-feed"></i>
-                     文章
-                </a>
-            </li>
-            <li className="">
-                <a>
-                    <i className="iconfont ic-latestcomments"></i>
-                     课件
-                </a>
-            </li>
-            <li className="">
-                <a>
-                    <i className="iconfont ic-hot"></i>
-                     热门
-                </a>
-            </li>
+            {
+                items.map((val, i)=>{
+                    let message, className="", curIndex, curClass="";
+                    if(typeof val == "string"){
+                        message = val;
+                    }if(typeof val == "object"){
+                        message = val.title;
+                        className = val.className;
+                    }
+
+                    if(selectIndex == -1){
+                        index = index || 0;
+                        if(index == i){
+                            curClass = "active";
+                        }
+                    }else if(selectIndex == i){
+                        curClass = "active";
+                    }
+
+                    return <li key={i} className={curClass}
+                               onClick={this.onSelectChangeHandler.bind(this, val, i)}>
+                        <a>
+                            <i className={"iconfont "+className}></i>
+                            {message}
+                        </a>
+                    </li>
+                })
+            }
         </ul>
     }
 }
@@ -47,6 +70,7 @@ export default class Tab extends Component {
 Tab.propTypes = {
     items: PropTypes.array,                        //菜单项 menu items
                                                    //               [
+                                                   //                   "",
                                                    //                   {
                                                    //                       src: "", string or Object,
                                                    //                   }
@@ -57,6 +81,6 @@ Tab.propTypes = {
 
 Tab.defaultProps = {
     items: [],
-    index: -1,
+    index: 0,
     onSelectChange: null,
 }

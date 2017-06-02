@@ -18,18 +18,28 @@ export default class PopMenu extends Component {
     }
 
     componentDidMount(){
-        document.body.addEventListener('touchstart', this.bodyClickBind, false);
-        document.body.addEventListener('click', this.bodyClickBind, false);
+        if(("ontouchstart" in window)){
+            document.body.addEventListener('touchstart', this.bodyClickBind, false);
+        }else{
+            document.body.addEventListener('click', this.bodyClickBind, false);
+        }
         this.originalClass = document.body.className;
     }
 
     componentWillUnmount(){
-        document.body.removeEventListener('click', this.bodyClickBind, false);
-        document.body.removeEventListener('touchstart', this.bodyClickBind, false);
+        if(("ontouchstart" in window)){
+            document.body.removeEventListener('touchstart', this.bodyClickBind, false);
+        }else{
+            document.body.removeEventListener('click', this.bodyClickBind, false);
+        }
     }
 
     //点击非本窗体则隐藏本窗体
     bodyClick(e){
+        if(!this.state.visible){
+            return;
+        }
+
         e = e || window.event;
         let target = e.target || e.srcElement;
         let keyboardBody = this.refs.root;

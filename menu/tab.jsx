@@ -57,7 +57,7 @@ export default class Tab extends Component {
                     return <li key={i} className={curClass}
                                onClick={this.onSelectChangeHandler.bind(this, val, i)}>
                         <a>
-                            <div className={"iconfont "+className}>{message}</div>
+                            <div className={"iconfont "+className}><span className="item-msg">{message}</span></div>
                         </a>
                     </li>
                 })

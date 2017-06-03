@@ -14,7 +14,6 @@ export default class PopMenu extends Component {
         }
 
         this.bodyClickBind = this.bodyClick.bind(this);
-        this.originalClass = "";
     }
 
     componentDidMount(){
@@ -23,7 +22,6 @@ export default class PopMenu extends Component {
         }else{
             document.body.addEventListener('click', this.bodyClickBind, false);
         }
-        this.originalClass = document.body.className;
     }
 
     componentWillUnmount(){

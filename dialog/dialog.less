@@ -1,0 +1,46 @@
+//弹窗背景遮罩层
+@speed: .2s;
+
+.ld{
+    &.ld-dc{
+        position:fixed;
+        top: 0;
+        bottom: 0;
+        left:0;
+        right:0;
+        z-index:600;
+        overflow: hidden;
+
+        .dialogPopup{
+            background: #000;
+            opacity: 0.3;
+            height: 100%;
+            width: 100%;
+        }
+
+        .bottom-up{
+            position: absolute;bottom: 0;width: 100%;left: 0;right:0px;
+            -webkit-animation: bottomup @speed;
+            -moz-animation: bottomup @speed;
+            -ms-animation: bottomup @speed;
+            -o-animation: bottomup @speed;
+            animation: bottomup @speed;
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            -ms-animation-fill-mode: forwards;
+            -o-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-play-state : running;
+        }
+
+    }
+
+}
+
+@keyframes bottomup
+{
+    0% {bottom: -999px;}
+    50% {bottom: 0;}
+    100% {bottom:50%;}
+}
+

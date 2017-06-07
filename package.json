@@ -1,0 +1,24 @@
+{
+  "name": "yoc-controls",
+  "version": "0.9.0",
+  "description": "A react controls lib provide by Lidong Yang/Sam Yang",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aiyld/yoc-controls.git"
+  },
+  "keywords": [
+    "React",
+    "Controls",
+    "Samyoc"
+  ],
+  "author": "Lidong Yang/Sam Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aiyld/yoc-controls/issues"
+  },
+  "homepage": "https://github.com/aiyld/yoc-controls#readme"
+}

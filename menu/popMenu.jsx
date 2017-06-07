@@ -91,6 +91,7 @@ export default class PopMenu extends Component {
     render(){
         let pop;
         let {visible} = this.state;
+        let {btnClass} = this.props;
         let className = "";
         if(visible){
             className = "show";
@@ -104,8 +105,10 @@ export default class PopMenu extends Component {
             cover = <div ref="cover" className="cover"></div>
         }
 
+        btnClass = btnClass || "";
+
         return <div ref="root" className="ld ld-pm">
-            <button className="menu-btn" onClick={this.toggleMenu.bind(this)}></button>
+            <i className={"menu-btn "+btnClass} onClick={this.toggleMenu.bind(this)}></i>
             {cover}
             <div ref="pop" className={"pop "+className}>
                 {this.props.children}
@@ -117,8 +120,10 @@ export default class PopMenu extends Component {
 PopMenu.propTypes = {
     getElements: PropTypes.func,                //Get elements witch would be push to left
                                                 //获取需要被动画推至左边的组件
+    btnClass: PropTypes.string,                 //The class name of the menu button 按钮的样式
 }
 
 PopMenu.defaultProps = {
     getElements: null,
+    btnClass: "",
 }

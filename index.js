@@ -19,7 +19,10 @@ exports.DotProgress = require("./progress/dotProgress.jsx").default;
 
 /*-------------------------------------------------*/
 
-//textinput
+//Textinput
 exports.SearchInput = require("./textinput/searchInput.jsx").default;
 
 /*-------------------------------------------------*/
+
+//Toast
+exports.Toast = require("./toast/toast.jsx").default;

@@ -48,32 +48,35 @@ export default class Dialog extends Component{
  * 
  */
 Dialog.show = (component, method) => {
+    let test = <Dialog/>
     let dialog;
     let container = document.getElementById("dialogContainer");
-    if(container){
-        //$("#dialogContainer").show();
-        return;
+    if(!container){
+        container = document.createElement("div");
+        container.id = "dialogContainer";
+        document.body.appendChild(container);
     }
 
     document.ontouchmove = null;
 
-    let dialogContainer = document.createElement("div");
-    dialogContainer.id = "dialogContainer";
-    document.body.appendChild(dialogContainer);
-
-    let props = {};
-    if(component){
-        for ( let k in component.props){
-            props[k] = component.props[k];
+    let newChild;
+    if(typeof component.type == "string"){
+        let props = {};
+        if(component){
+            for ( let k in component.props){
+                props[k] = component.props[k];
+            }
         }
+        props.hideDialog = () => {
+            if(dialog){
+                dialog.hideDialog();
+            }
+        };
+
+        newChild = React.cloneElement(component, props);
+    }else{
+        newChild = component;
     }
-    props.hideDialog = () => {
-        if(dialog){
-            dialog.hideDialog();
-        }
-    };
 
-    let newChild = React.cloneElement(component, props);
-
-    dialog = ReactDOM.render(<Dialog hideClick={method}>{newChild}</Dialog>, document.getElementById("dialogContainer"));
+    dialog = ReactDOM.render(<Dialog hideClick={method}>{newChild}</Dialog>, container);
 };

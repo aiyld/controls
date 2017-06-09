@@ -31,7 +31,11 @@ export default class DotProgress extends Component {
         let {enable} = this.props;
         let loadStyle;
 
-        if(!enable || (isShow!=null && !isShow)){
+        if(isShow==null){
+            if(!enable){
+                loadStyle = {display: "none"};
+            }
+        }else if(!isShow){
             loadStyle = {display: "none"};
         }
 

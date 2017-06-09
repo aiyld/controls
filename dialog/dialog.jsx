@@ -20,12 +20,7 @@ export default class Dialog extends Component{
             this.props.hideClick();
         }
 
-        document.ontouchmove = function (e) { e.preventDefault();};
-        $("#dialogContainer").remove();
-        let container = document.getElementById("dialogContainer");
-        if(container){
-            document.body.removeChild(container);
-        }
+        Dialog.hide();
     }
 
     render() {
@@ -45,7 +40,7 @@ export default class Dialog extends Component{
  *
  * @param component 对话框内的组件 The component to be shown in dialog container
  * @param method 关闭对话框内执行的方法 The method to be excuted before remove the dialog container
- * 
+ *
  */
 Dialog.show = (component, method) => {
     let test = <Dialog/>
@@ -80,3 +75,11 @@ Dialog.show = (component, method) => {
 
     dialog = ReactDOM.render(<Dialog hideClick={method}>{newChild}</Dialog>, container);
 };
+
+Dialog.hide = () => {
+    document.ontouchmove = function (e) { e.preventDefault();};
+    let container = document.getElementById("dialogContainer");
+    if(container){
+        document.body.removeChild(container);
+    }
+}

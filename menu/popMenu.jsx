@@ -32,6 +32,10 @@ export default class PopMenu extends Component {
         }
     }
 
+    addClickEvent(){
+
+    }
+
     //点击非本窗体则隐藏本窗体
     bodyClick(e){
         if(!this.state.visible){
@@ -57,6 +61,9 @@ export default class PopMenu extends Component {
             visible = !status;
         }
         this.setState({visible: !visible});
+        if(visible){
+
+        }
     }
 
     //驱动父组件动画

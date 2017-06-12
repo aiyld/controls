@@ -17,6 +17,16 @@ export default class PopMenu extends Component {
     }
 
     componentDidMount(){
+
+    }
+
+    componentWillUnmount(){
+        this.removeBodyEvent();
+    }
+
+    //增加点击body其他位置时隐藏本窗体事件
+    addBodyEvent(){
+        console.log("add");
         if(("ontouchstart" in window)){
             document.body.addEventListener('touchstart', this.bodyClickBind, false);
         }else{
@@ -24,16 +34,14 @@ export default class PopMenu extends Component {
         }
     }
 
-    componentWillUnmount(){
+    //移除增加点击body其他位置时隐藏本窗体事件
+    removeBodyEvent(){
+        console.log("remove");
         if(("ontouchstart" in window)){
             document.body.removeEventListener('touchstart', this.bodyClickBind, false);
         }else{
             document.body.removeEventListener('click', this.bodyClickBind, false);
         }
-    }
-
-    addClickEvent(){
-
     }
 
     //点击非本窗体则隐藏本窗体
@@ -61,8 +69,10 @@ export default class PopMenu extends Component {
             visible = !status;
         }
         this.setState({visible: !visible});
-        if(visible){
-
+        if(!visible){
+            this.addBodyEvent();
+        }else{
+            this.removeBodyEvent();
         }
     }
 

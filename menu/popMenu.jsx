@@ -26,7 +26,6 @@ export default class PopMenu extends Component {
 
     //增加点击body其他位置时隐藏本窗体事件
     addBodyEvent(){
-        console.log("add");
         if(("ontouchstart" in window)){
             document.body.addEventListener('touchstart', this.bodyClickBind, false);
         }else{
@@ -36,7 +35,6 @@ export default class PopMenu extends Component {
 
     //移除增加点击body其他位置时隐藏本窗体事件
     removeBodyEvent(){
-        console.log("remove");
         if(("ontouchstart" in window)){
             document.body.removeEventListener('touchstart', this.bodyClickBind, false);
         }else{

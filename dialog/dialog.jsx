@@ -52,8 +52,6 @@ Dialog.show = (component, method) => {
         document.body.appendChild(container);
     }
 
-    document.ontouchmove = null;
-
     let newChild;
     if(typeof component.type == "string"){
         let props = {};
@@ -77,7 +75,6 @@ Dialog.show = (component, method) => {
 };
 
 Dialog.hide = () => {
-    document.ontouchmove = function (e) { e.preventDefault();};
     let container = document.getElementById("dialogContainer");
     if(container){
         document.body.removeChild(container);

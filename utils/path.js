@@ -13,6 +13,10 @@ export default {
         var obj = {},tmp,
             str = typeof param == "string" ? param : location.search.replace("?","");
 
+        if(!str){
+            str = location.href.split("?")[1];
+        }
+
         var arr = str.split("&");
         if(arr.length > 0){
             for(var i = 0,l=arr.length ;i<l;i++){

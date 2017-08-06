@@ -19,7 +19,8 @@
         }
 
         .bottom-up{
-            position: absolute;bottom: 0;width: 100%;left: 0;right:0px;
+            position: absolute;bottom: -999px;width: 100%;left: 0;right:0px;
+            height: 100%;
             -webkit-animation: bottomup @speed;
             -moz-animation: bottomup @speed;
             -ms-animation: bottomup @speed;
@@ -33,6 +34,9 @@
             -webkit-animation-play-state : running;
         }
 
+        .flexshow{height: 100%;}
+        .center{overflow-y: auto;}
+
     }
 
 }
@@ -40,7 +44,7 @@
 @keyframes bottomup
 {
     0% {bottom: -999px;}
-    50% {bottom: 0;}
-    100% {bottom:50%;}
+    50% {bottom: -333px;}
+    100% {bottom:0;}
 }
 

@@ -1,9 +1,37 @@
 .flexshow{
-    display: flex;
+    display:-webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: -webkit-flex;
+    display: flex;
+}
+.flex-column{
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -moz-box-orient:vertical;
+    -moz-box-direction:normal;
+    flex-direction:column;
+    -webkit-flex-direction:column;
+}
+.flex{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 
-.flex{
-    flex: 1;
-    -webkkit-flex: 1;
+.flex-wrap {
+    -webkit-box-lines: multiple;
+    /* 12版 */
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.align-items{
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
 }

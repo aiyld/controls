@@ -1,0 +1,47 @@
+@import (reference) "../css/common.less";
+
+.ctrl{
+    &.c-sc{
+        moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select:none;
+        -khtml-user-select:none;
+        -webkit-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+
+        .drag{
+            position: relative;
+            height: 34px;
+            background-color: #d2d2d2;
+            line-height: 34px;
+            border-radius: 6px;
+
+            .bg-drag{
+                position: absolute;
+                width: 40px;
+                height: 100%;
+                background-color: #7ac23c;
+                border-radius: 6px;
+            }
+            .text-drag{
+                position: absolute;
+                width: 100%;
+                margin: 0;
+                text-align: center;
+                color: #fff;
+            }
+            .btn-drag{
+                position: absolute;
+                width: 40px;
+                height: 100%;
+                cursor: pointer;
+                background-color: #fff;
+                border: 1px solid #d2d2d2;
+                border-radius: 6px;
+                background: #fff url(../img/drag.svg) center no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+}

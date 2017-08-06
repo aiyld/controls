@@ -8,8 +8,6 @@ export default class Dialog extends Component{
     }
 
     componentDidMount(){
-        this.refs.childrenArea.style.marginBottom = this.refs.childrenArea.clientHeight / -2 + "px";
-        console.log(this.refs.childrenArea.style.marginTop);
     }
 
     /**
@@ -28,8 +26,14 @@ export default class Dialog extends Component{
 
         return(
             <div className="ld ld-dc">
-                <div className="dialogPopup" onClick={this.hide.bind(this)}></div>
-                <div className={modeClass}><div ref="childrenArea">{this.props.children}</div></div>
+                <div className="dialogPopup"></div>
+                <div className={modeClass}>
+                    <div className={"flexshow flex-column"}>
+                        <div className="flex" onClick={this.hide.bind(this)}></div>
+                        <div className="center" ref="childrenArea">{this.props.children}</div>
+                        <div className="flex" onClick={this.hide.bind(this)}></div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -72,6 +76,8 @@ Dialog.show = (component, method) => {
     }
 
     dialog = ReactDOM.render(<Dialog hideClick={method}>{newChild}</Dialog>, container);
+
+    return dialog;
 };
 
 Dialog.hide = () => {

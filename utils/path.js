@@ -14,7 +14,7 @@ export default {
             str = typeof param == "string" ? param : location.search.replace("?","");
 
         if(!str){
-            str = location.href.split("?")[1];
+            str = location.href.split("?")[1] || "";
         }
 
         var arr = str.split("&");

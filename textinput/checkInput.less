@@ -1,0 +1,63 @@
+@import (reference) "../css/common.less";
+
+.ctrl{
+    &.c-ci{
+        position: relative;
+        border: 1px solid #c8c8c8;
+        background-color: hsla(0,0%,71%,.1);
+        background-color:rgb(250, 255, 189);
+        .flexshow;
+
+        .iconfont{
+            line-height: 50px;
+            margin-left: 10px;
+        }
+
+        input {
+            height: 50px;
+            margin-bottom: 0;
+            padding: 4px 0px 4px 10px;
+            vertical-align: middle;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            border: 0;
+        }
+
+        .btn-code{
+            width: 80px;
+            border: 0;
+            padding: 6px;
+            margin: 10px;
+            position: absolute;
+            right: 0;
+            border-radius: 6px;
+            background: #42c02e;
+            color: #fff;
+            outline: none;
+        }
+
+        .msg{
+            position: absolute;
+            right: 0;
+            font-size: 12px;
+            color: #ff4343;
+            padding: 0 6px;
+            line-height: 50px;
+        }
+
+        &.low{background-color: #f9f9f9;}
+        &.top, &.middle{
+            margin-bottom: 0px;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+        }
+
+        &.middle{
+            border-radius:0;
+        }
+        &.bottom{
+            border-radius: 0 0 4px 4px;
+        }
+    }
+}

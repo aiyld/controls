@@ -62,7 +62,9 @@ export default {
         var paramsStr = fistPart.split("?");
         var hashParas = hashPart.split("?");
 
-        paramsStr.push(hashParas[1]);
+        if(hashParas[1]){
+            paramsStr.push(hashParas[1]);
+        }
 
         if (paramsStr != null) {
             for (var i = 0; i < paramsStr.length; i++) {

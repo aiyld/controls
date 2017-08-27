@@ -31,8 +31,12 @@
             bottom: 0;
             width: 100%;
             max-width: @width;
-            overflow-y: auto;
             background: transparent;
+            overflow: hidden;
+
+            div:first-child{
+                overflow: auto;
+            }
         }
 
         .cover{

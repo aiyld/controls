@@ -16,7 +16,7 @@ export default class Tab extends Component {
     }
 
     componentDidMount(){
-
+        this.setState({selectIndex: this.props.index});
     }
 
     onSelectChangeHandler(item, i){

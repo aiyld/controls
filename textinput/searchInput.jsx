@@ -23,6 +23,9 @@ export default class SearchInput extends Component {
         let txt = this.refs.txtInput.value;
 
         if(clickEvent){
+            if(this.props.clearThen){
+                this.refs.txtInput.value = "";
+            }
             clickEvent(txt, e);
         }
     }
@@ -35,6 +38,20 @@ export default class SearchInput extends Component {
         }
     }
 
+    //键盘的按击事件
+    onKeyDown(event){
+        let txt = this.refs.txtInput.value;
+        let e = event || window.event || arguments.callee.caller.arguments[0];
+        if(this.props.onKeyDown){
+            this.props.onKeyDown(e);
+        }
+
+        if(e && e.keyCode==13){ // enter 键
+            //要做的事情
+            this.triggleClick(txt);
+        }
+    }
+
     render(){
         let {src, showDefaultImg} = this.props;
         if(showDefaultImg){
@@ -43,7 +60,7 @@ export default class SearchInput extends Component {
 
         return (
             <div className="ctrl c-si">
-                <input ref="txtInput" onChange={this.triggleTextChanged.bind(this)} type="text" placeholder="搜索" className="search-input"/>
+                <input onKeyDown={this.onKeyDown.bind(this)} ref="txtInput" onChange={this.triggleTextChanged.bind(this)} type="text" placeholder="搜索" className="search-input"/>
                 <a className="search-btn" href="javascript:void(null)" onClick={this.triggleClick.bind(this)}>
                     <img className="ic-search" src={src}></img>
                 </a>
@@ -56,6 +73,8 @@ SearchInput.propTypes = {
     placeholder: PropTypes.string,                 //输入提示 placeholder
     click: PropTypes.func,                         //点击事件 click event
     onTextChange: PropTypes.func,                  //文本框输入改变 Text input change
+    onKeyDown: PropTypes.func,                     //键盘事件
+    clearThen: PropTypes.bool,                     //是否清除输入
     showDefaultImg: PropTypes.bool,                //显示默认的图标 Indicate if need to show default img
     src: PropTypes.oneOfType([                     //图片路径 Button img src
         PropTypes.string,
@@ -68,5 +87,6 @@ SearchInput.defaultProps = {
     click: null,
     onTextChange: null,
     showDefaultImg: false,
+    clearThen: false,
     src: "",
 }

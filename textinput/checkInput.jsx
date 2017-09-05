@@ -66,6 +66,20 @@ export default class CheckInput extends Component {
         return this.isTextOK;
     }
 
+    //键盘的按击事件
+    onKeyDown(event){
+        let txt = this.refs.input.value;
+        let e = event || window.event || arguments.callee.caller.arguments[0];
+        if(this.props.onKeyDown){
+            this.props.onKeyDown(e);
+        }
+
+        if(e && e.keyCode==13 && this.props.onEnter){ // enter 键
+            //要做的事情
+            this.props.onEnter(txt);
+        }
+    }
+
     render(){
         let {icon, corner, placeholder, type, msg} = this.props;
         let {low, showMsg} = this.state;
@@ -82,7 +96,7 @@ export default class CheckInput extends Component {
 
         return <div className={"ctrl c-ci "+corner+" "+low}>
             {iconArea}
-            <input ref="input" onClick={this.inputClick.bind(this)} onChange={this.textChange.bind(this)} placeholder={placeholder} type={type}/>
+            <input ref="input" onKeyDown={this.onKeyDown.bind(this)} onClick={this.inputClick.bind(this)} onChange={this.textChange.bind(this)} placeholder={placeholder} type={type}/>
             {msgArea}
             {this.props.children}
         </div>
@@ -93,4 +107,5 @@ CheckInput.defaultProps = {
     corner: "",
     placeholder: "",
     type: "text",
+    onEnter: null,
 }

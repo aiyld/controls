@@ -10,7 +10,7 @@ export default class CircleButton extends Component {
 
     render(){
         let {src, showDefaultImg, className,
-             text, height} = this.props;
+             text, height, href, target, onClick} = this.props;
         if(showDefaultImg){
             src = require("../img/white_search.png");
         }
@@ -20,7 +20,17 @@ export default class CircleButton extends Component {
             img = <img height={height} className="" src={src}/>;
         }
 
-        return <a className={"ld ld-circlebutton "+className}>
+        let obj;
+        if(onClick){
+            obj = {
+                onClick,
+                href: "javascript:void(0)"
+            }
+        }else{
+            obj = {href, target: target||"_self"};
+        }
+
+        return <a className={"ld ld-circlebutton "+className} {...obj}>
             {img}{text}
         </a>
     }

@@ -53,16 +53,11 @@ export default class SearchInput extends Component {
     }
 
     render(){
-        let {src, showDefaultImg} = this.props;
-        if(showDefaultImg){
-            src = require("../img/white_search.png");
-        }
-
         return (
             <div className="ctrl c-si">
                 <input onKeyDown={this.onKeyDown.bind(this)} ref="txtInput" onChange={this.triggleTextChanged.bind(this)} type="text" placeholder="搜索" className="search-input"/>
                 <a className="search-btn" href="javascript:void(null)" onClick={this.triggleClick.bind(this)}>
-                    <img className="ic-search" src={src}></img>
+                    <i className="iconfont icon-sousuo"></i>
                 </a>
             </div>
         );

@@ -11,21 +11,31 @@ export default {
     */
     getParameter: function(name,param,unfilter,undecode){
         var obj = {},tmp,
-            str = typeof param == "string" ? param : location.search.replace("?","");
+            str = typeof param == "string" ? param : location.search;
 
         if(!str){
             str = location.href.split("?")[1] || "";
+        }else{
+            str = str.replace("?","");
         }
 
         var arr = str.split("&");
+
         if(arr.length > 0){
             for(var i = 0,l=arr.length ;i<l;i++){
                 try{
                     if(/(.*?)=(.*)/.test(arr[i])){
-                        tmp = undecode ? RegExp.$2 : decodeURIComponent(RegExp.$2);
-                        obj[RegExp.$1] = unfilter ? tmp : this.filterScript(tmp);
+                        if(typeof document === "undefined"){
+                            var paramTarget = arr[i].split("=");
+                            obj[paramTarget[0]] = decodeURI(paramTarget[1]);
+                        }else{
+                            tmp = undecode ? RegExp.$2 : decodeURIComponent(RegExp.$2);
+                            obj[RegExp.$1] = unfilter ? tmp : this.filterScript(tmp);
+                        }
                     }
-                }catch(e){}
+                }catch(e){
+
+                }
             }
         }
         return name ? obj[name] : obj;

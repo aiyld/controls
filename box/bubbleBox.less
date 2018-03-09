@@ -1,0 +1,120 @@
+@import (reference) "../css/common.less";
+
+.bubble-box {
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 10px 15px 30px;
+  box-sizing: border-box;
+
+  .t-con {
+    .flexshow;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgb(252, 231, 231);
+    justify-content: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    align-items: baseline;
+    -webkit-align-items: baseline;
+    -moz-align-items: baseline;
+    -ms-align-items: baseline;
+    -o-align-items: baseline;
+
+    .c1 {
+      width: 25px;
+      height: 25px;
+      border-radius: 100%;
+      border: 1px dashed rgb(192, 192, 192);
+      margin-top: -5px;
+      box-sizing: border-box;
+    }
+
+    .c2 {
+      margin: 0 10px;
+
+      .b-title {
+        font-size: 22px;
+        color: rgb(102, 182, 231);
+        min-width: 1px;
+        margin: 0;
+      }
+    }
+
+    .c3 {
+      width: 15px;
+      height: 15px;
+      border-radius: 100%;
+      border: 1px dashed rgb(192, 192, 192);
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
+
+    .c4 {
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      border: 1px dashed rgb(192, 192, 192);
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+  }
+
+  .bubble-main {
+    margin-top: 10px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+
+    .m1 {
+      width: 50%;
+      transform: rotate(10deg);
+      -webkit-transform: rotate(10deg);
+      -moz-transform: rotate(10deg);
+      -ms-transform: rotate(10deg);
+      -o-transform: rotate(10deg);
+
+      .min1 {
+        width: 18px;
+        height: 50px;
+        background: rgb(252, 231, 231);
+        opacity: 0.8;
+        border-radius: 5px;
+        margin-bottom: -30px;
+        margin-left: 10%;
+        transform: rotate(50deg);
+        -webkit-transform: rotate(50deg);
+        -moz-transform: rotate(50deg);
+        -ms-transform: rotate(50deg);
+        -o-transform: rotate(50deg);
+      }
+
+      .min2 {
+        background: rgb(242, 242, 243);
+        padding: 10px;
+        width: 80%;
+        margin-left: 10%;
+        box-sizing: border-box;
+
+        img {
+          width: 100%;
+          border-radius: 5px;
+          vertical-align: top;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      .m-brief {
+        flex: 1;
+        margin-left: 10px;
+      }
+    }
+  }
+}

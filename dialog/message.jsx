@@ -177,6 +177,10 @@ class Message {
     }
 
     render() {
+        if(typeof document == 'undefined'){
+            return "";
+        }
+
         this.node = document.createElement('div');
         this.node.className = 'global-message-component';
         document.body.appendChild(this.node);

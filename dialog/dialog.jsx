@@ -2,41 +2,42 @@ import React, { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import "./dialog.less";
 
-export default class Dialog extends Component{
-    constructor(props){
-        super(props);
+export default class Dialog extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {}
+
+  /**
+   * 隐藏内容
+   */
+  hide() {
+    if (this.props.hideClick) {
+      this.props.hideClick();
     }
 
-    componentDidMount(){
-    }
+    Dialog.hide(this.props.rootId);
+  }
 
-    /**
-     * 隐藏内容
-     */
-    hide(){
-        if(this.props.hideClick){
-            this.props.hideClick();
-        }
+  render() {
+    let modeClass = "bottom-up";
 
-        Dialog.hide();
-    }
-
-    render() {
-        let modeClass = "bottom-up";
-
-        return(
-            <div className="ld ld-dc">
-                <div className="dialogPopup"></div>
-                <div className={modeClass}>
-                    <div className={"flexshow flex-column"}>
-                        <div className="flex" onClick={this.hide.bind(this)}></div>
-                        <div className="center" ref="childrenArea">{this.props.children}</div>
-                        <div className="flex" onClick={this.hide.bind(this)}></div>
-                    </div>
-                </div>
+    return (
+      <div className="ld ld-dc">
+        <div className="dialogPopup" />
+        <div className={modeClass}>
+          <div className={"flexshow flex-column"}>
+            <div className="flex" onClick={this.hide.bind(this)} />
+            <div className="center" ref="childrenArea">
+              {this.props.children}
             </div>
-        )
-    }
+            <div className="flex" onClick={this.hide.bind(this)} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 /**
@@ -46,43 +47,49 @@ export default class Dialog extends Component{
  * @param method 关闭对话框内执行的方法 The method to be excuted before remove the dialog container
  *
  */
-Dialog.show = (component, method) => {
-    let test = <Dialog/>
-    let dialog;
-    let container = document.getElementById("dialogContainer");
-    if(!container){
-        container = document.createElement("div");
-        container.id = "dialogContainer";
-        document.body.appendChild(container);
+Dialog.show = (component, method, id) => {
+  id = id || "dialogContainer";
+  let test = <Dialog />;
+  let dialog;
+  let container = document.getElementById(id);
+  if (!container) {
+    container = document.createElement("div");
+    container.id = id;
+    document.body.appendChild(container);
+  }
+
+  let newChild;
+  if (typeof component.type == "string") {
+    let props = {};
+    if (component) {
+      for (let k in component.props) {
+        props[k] = component.props[k];
+      }
     }
+    props.hideDialog = () => {
+      if (dialog) {
+        dialog.hideDialog();
+      }
+    };
 
-    let newChild;
-    if(typeof component.type == "string"){
-        let props = {};
-        if(component){
-            for ( let k in component.props){
-                props[k] = component.props[k];
-            }
-        }
-        props.hideDialog = () => {
-            if(dialog){
-                dialog.hideDialog();
-            }
-        };
+    props.rootId = id;
+    newChild = React.cloneElement(component, props);
+  } else {
+    newChild = component;
+  }
 
-        newChild = React.cloneElement(component, props);
-    }else{
-        newChild = component;
-    }
+  dialog = ReactDOM.render(
+    <Dialog hideClick={method}>{newChild}</Dialog>,
+    container
+  );
 
-    dialog = ReactDOM.render(<Dialog hideClick={method}>{newChild}</Dialog>, container);
-
-    return dialog;
+  return dialog;
 };
 
-Dialog.hide = () => {
-    let container = document.getElementById("dialogContainer");
-    if(container){
-        document.body.removeChild(container);
-    }
-}
+Dialog.hide = id => {
+  id = id || "dialogContainer";
+  let container = document.getElementById(id);
+  if (container) {
+    document.body.removeChild(container);
+  }
+};

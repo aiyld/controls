@@ -1,11 +1,22 @@
 @import (reference) "../css/common.less";
 
 .dclamp {
+  max-height: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .dcontent {
+    overflow: hidden;
+    writing-mode: vertical-lr; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
+    writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+  }
+
   .dclamp_title {
-    text-align: center;
     color: #333;
     font-size: 18px;
     margin: 0px;
+    margin-left: 6px;
+    font-weight: 400;
 
     a {
       color: #333;
@@ -18,13 +29,14 @@
   }
 
   .brief {
-    text-align: center;
     color: #828282;
     font-weight: 300;
     line-height: 24px;
   }
 
   .dclamp_content {
+    min-width: 200px;
+    .flex;
     .se1 {
       line-height: 25.6px;
       white-space: normal;
@@ -108,6 +120,23 @@
           }
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .dclamp .dclamp_content .picm {
+    .picml .mlm {
+      width: 130px;
+      padding-bottom: 8px;
+      margin-top: -10px;
+      margin-left: -8px;
+    }
+    .picmr .mrm {
+      padding-bottom: 8px;
+      margin-top: 38px;
+      margin-left: -60px;
+      width: 130px;
     }
   }
 }

@@ -5,9 +5,11 @@ import "../img/dclamp_02.png";
 
 const DClamp = props => {
   return (
-    <div className="dclamp">
-      <h2 className="dclamp_title">{props.title}</h2>
-      <h4 className="brief">{props.brief}</h4>
+    <div className="dclamp flexshow">
+      <div className="dcontent">
+        <h2 className="dclamp_title">{props.title}</h2>
+        <p className="brief">{props.brief}</p>
+      </div>
       <div className="dclamp_content">
         <section className="se1">
           <img className="pic1" src="/img/dclamp_01.png" />

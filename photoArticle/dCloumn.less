@@ -1,0 +1,53 @@
+@import (reference) "../css/common.less";
+
+.dcloumn {
+  overflow: hidden;
+  height: 160px;
+  .piccol {
+    width: 130px;
+    min-width: 130px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .dccontent {
+    margin: 0 auto;
+    height: 100%;
+    writing-mode: vertical-lr; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
+    writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+    text-overflow: ellipsis;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #02a5e8ab;
+    overflow: hidden;
+    .flexshow;
+    .flex-column;
+
+    .phoar_title {
+      .phoar_title;
+      text-align: left;
+      font-size: 16px;
+      margin-left: 10px;
+      color: #fff;
+      a {
+        color: #fff;
+      }
+    }
+
+    .phoar_brief {
+      overflow: hidden;
+      h4 {
+        .phoar_brief;
+        text-align: left;
+        margin-top: 0;
+        margin-right: 0px;
+        margin-left: 10px;
+        color: #fff;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

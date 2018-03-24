@@ -1,5 +1,6 @@
 import React from "react";
 import "./dotLineTitle.less";
+import "../img/dot_line_1.jpeg";
 
 const DotLineTitle = props => {
   return (

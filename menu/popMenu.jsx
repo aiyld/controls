@@ -58,6 +58,9 @@ export default class PopMenu extends Component {
         if(!isChild || target == this.refs.cover){
             this.toggleMenu(false);
         }
+
+        e.preventDefault();
+        e.stopPropagation();
     }
 
     //控制切换菜单

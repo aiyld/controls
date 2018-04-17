@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import "../css/blurImg.less";
+import "../css/lazy/blurImg.less";
 
 export default class BlurImg extends PureComponent {
     constructor(props) {

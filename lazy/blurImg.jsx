@@ -12,9 +12,11 @@ export default class BlurImg extends PureComponent {
 
     componentDidMount() {
         if (!this.props.thumb) {
+            this.normalImg.src = "";
             this.normalImg.src = this.props.src;
             this.setState({isOK: true, src: this.props.src});
         } else {
+            this.thumbImg.src = "";
             this.thumbImg.src = this.props.thumb;
             this.setState({src: this.props.thumb});
         }

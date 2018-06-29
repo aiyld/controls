@@ -1,5 +1,6 @@
 import React from "react";
 import "./mulNote.less";
+import BlurImg from "../lazy/blurImg.jsx";
 
 const MulNote = props => {
   return (
@@ -10,8 +11,10 @@ const MulNote = props => {
         <p className="phoar_brief">{props.brief}</p>
         <div className="picarea">
             {props.imgs.map((val, index)=>{
+                const result = props.getBlur ? props.getBlur(val): { src: val };
+
                 return <div className="flex" key={index}>
-                    <div className="img" style={{ backgroundImage: `url(${val})` }}></div>
+                    <BlurImg className="img" {...result}/>
                 </div>
             })}
         </div>

@@ -130,14 +130,16 @@ export class ToastComponent extends Component {
     constructor(props){
         super(props);
         this.state = {
-            visible: false
+            visible: false,
+            className: ""
         }
     }
 
-    show(text, timeout = 3000, callback) {
+    show(text, timeout = 3000, callback, status) {
         this.setState({
             visible: true,
-            text: text
+            text: text,
+            className: status
         });
 
         if(timeout){
@@ -165,7 +167,9 @@ export class ToastComponent extends Component {
 
         return (
             <section className={cn}>
+                <div className={"toast-view " + this.state.className}>
                 {this.state.text}
+                </div>
             </section>
         )
     }
@@ -206,7 +210,15 @@ class Message {
     }
 
     toast(text, timeout = 3000, callback) {
-        this.toastRef.show(text, timeout, callback);
+        this.toastRef.show(text, timeout, callback, "");
+    }
+
+    toastErr(text, timeout = 3000, callback) {
+        this.toastRef.show(text, timeout, callback, "err");
+    }
+
+    toastWaring(text, timeout = 3000, callback) {
+        this.toastRef.show(text, timeout, callback, "warning");
     }
 
     closeToast() {

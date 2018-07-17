@@ -27,10 +27,12 @@ export default class Dialog extends Component {
       <div className="ld ld-dc">
         <div className="dialogPopup" />
         <div className={modeClass}>
-          <div className={"flexshow flex-column"}>
+          <div className={"flexshow flex-column mode-root"}>
             <div className="flex" onClick={this.hide.bind(this)} />
-            <div className="center" ref="childrenArea">
-              {this.props.children}
+            <div className="center flexshow" ref="childrenArea">
+              <div className="flex" onClick={this.hide.bind(this)} />
+              <div style={{maxWidth: "100%"}}>{this.props.children}</div>
+              <div className="flex" onClick={this.hide.bind(this)} />
             </div>
             <div className="flex" onClick={this.hide.bind(this)} />
           </div>
@@ -79,7 +81,7 @@ Dialog.show = (component, method, id) => {
   }
 
   dialog = ReactDOM.render(
-    <Dialog hideClick={method}>{newChild}</Dialog>,
+    <Dialog rootId={id} hideClick={method}>{newChild}</Dialog>,
     container
   );
 

@@ -106,7 +106,7 @@ export default class Pagination extends Component {
   }
 
   render() {
-    const {total, preText, nexText, ellipsisText, beginIndex} = this.props;
+    const {total, preText, nextText, ellipsisText, beginIndex} = this.props;
     let {index} = this.state;
 
     return (
@@ -121,7 +121,7 @@ export default class Pagination extends Component {
           {index !== total && total > 0 ? <li className="next" onClick={this
             .onNext
             .bind(this)}>
-            <a href={this.getUrl(index + 1)}>{nexText}</a>
+            <a href={this.getUrl(index + 1)}>{nextText}</a>
           </li>:""}
         </ul>
       </div>
@@ -129,9 +129,20 @@ export default class Pagination extends Component {
   }
 }
 
+/**
+ * 根据记录的总数和每页展现数，计算总页数
+ * @param {Number} recordsLength 记录的总数
+ * @param {Number} pageSize 每页展现数
+ */
+Pagination.calTotalPage = (recordsLength, pageSize) => {
+  let result = parseInt(recordsLength / pageSize);
+
+  return result * pageSize < recordsLength ? (result + 1) : result;
+};
+
 Pagination.defaultProps = {
   limit: 5, // 共展示五位数字
-  total: -1, // 总共
+  total: -1, // 总共页数
   preText: "上一页",
   nextText: "下一页",
   ellipsisText: "...",

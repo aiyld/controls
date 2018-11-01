@@ -73,6 +73,7 @@ export default class Tab extends Component {
                     <a href="javascript:void(0)">
                         <div className={"iconfont " + className}>
                             <span className="item-msg">{message}</span>
+                            {val.children}
                         </div>
                     </a>
                 </li>

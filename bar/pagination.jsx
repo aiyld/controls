@@ -112,17 +112,17 @@ export default class Pagination extends Component {
     return (
       <div className="ld ld-pagination">
         <ul>
-          {index !== 1 ? <li className="pre" onClick={this
+          <li className="pre" onClick={this
             .onPre
             .bind(this)}>
-            <a href={this.getUrl(index-1)}>{preText}</a>
-          </li>:""}
+            {index !== 1 ? <a href={this.getUrl(index-1)}>{preText}</a>:<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
+          </li>
           {this.generate(index)}
-          {index !== total && total > 0 ? <li className="next" onClick={this
+          <li className="next" onClick={this
             .onNext
             .bind(this)}>
-            <a href={this.getUrl(index + 1)}>{nextText}</a>
-          </li>:""}
+            {index !== total && total > 0 ? <a href={this.getUrl(index + 1)}>{nextText}</a>:<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
+          </li>
         </ul>
       </div>
     );

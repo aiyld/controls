@@ -15,7 +15,7 @@ export default class Pagination extends Component {
     if(!this.props.urlTem) {
       this.setState({index});
       if(this.props.onPageChange) {
-        this.props.onPageChange();
+        this.props.onPageChange(index);
       }
     }
   }

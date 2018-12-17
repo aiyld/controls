@@ -38,6 +38,10 @@ export default class SearchInput extends Component {
         }
     }
 
+    getValue() {
+        return this.refs.txtInput.value;
+    }
+
     //键盘的按击事件
     onKeyDown(event){
         let txt = this.refs.txtInput.value;

@@ -3,11 +3,23 @@
 .bash-title{
     .titlec{
         margin-bottom: 6px;
+        border-bottom: 2px solid #ececec;
+        padding-bottom: 8px;
         .flexshow;
         .bt-title{
             margin: 0;
             color: rgba(0, 166, 232, 0.888);
             font-weight: 400;
+            position: relative;
+            &::after {
+                content: " ";
+                position: absolute;
+                width: 100%;
+                background-color: rgba(0, 166, 232, 0.888);
+                height: 2px;
+                bottom: -10px;
+                left: 0px;
+            }
         }
         .bt-child{
             .flex;

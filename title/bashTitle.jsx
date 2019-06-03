@@ -1,6 +1,5 @@
 import React from "react";
 import "./bashTitle.less";
-import TwoLine from "../line/twoLine.jsx";
 
 const BashTitle = props => {
   return (
@@ -11,7 +10,6 @@ const BashTitle = props => {
                 {props.children}
             </div>
         </div>
-        <TwoLine/>
     </section>
   );
 };

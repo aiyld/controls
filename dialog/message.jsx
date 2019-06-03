@@ -4,9 +4,9 @@
  * @Desc: 弹层
  */
 
-import React, { Component } from 'react';
-import './message.less';
+import React, { Component } from "react";
 import {render} from "react-dom";
+import "./message.less";
 
 /**
  *
@@ -37,10 +37,10 @@ export class MessageComponent extends Component {
         super(props);
         this.state = {
             visible: false,
-            title: '标题', // 标题
-            msg: '提示的内容', // 提示的内容
-            btnTxt: ['确定'], // 可不传，默认是确定
-            btnFn: [() => {console.log('确定')}],
+            title: "标题", // 标题
+            msg: "提示的内容", // 提示的内容
+            btnTxt: ["确定"], // 可不传，默认是确定
+            btnFn: [() => {console.log("确定")}],
             children: null
         }
     }
@@ -50,7 +50,7 @@ export class MessageComponent extends Component {
             visible: false
         })
         const btnFn = this.state.btnFn;
-        Array.isArray(btnFn) && typeof btnFn[1] === 'function' && btnFn[1]();
+        Array.isArray(btnFn) && typeof btnFn[1] === "function" && btnFn[1]();
     }
 
     cancelHandler() {
@@ -58,7 +58,7 @@ export class MessageComponent extends Component {
             visible: false
         })
         const btnFn = this.state.btnFn;
-        Array.isArray(btnFn) && typeof btnFn[0] === 'function' && btnFn[0]();
+        Array.isArray(btnFn) && typeof btnFn[0] === "function" && btnFn[0]();
     }
 
     alert(params) {
@@ -66,8 +66,8 @@ export class MessageComponent extends Component {
             visible: true,
             title: params.title, // 标题
             msg: params.msg, // 提示的内容
-            btnTxt: params.btnTxt || ['确定'], // 可不传，默认是确定
-            btnFn: params.btnFn || [() => {console.log('确定')}],
+            btnTxt: params.btnTxt || ["确定"], // 可不传，默认是确定
+            btnFn: params.btnFn || [() => {console.log("确定")}],
             children: params.children
         });
     }
@@ -75,10 +75,10 @@ export class MessageComponent extends Component {
     confirm(params) {
         this.setState({
             visible: true,
-            title: params.title || '', // 标题
+            title: params.title || "", // 标题
             msg: params.msg, // 提示的内容
-            btnTxt: params.btnTxt || ['取消', '确定'], // 可不传，默认是取消，确定
-            btnFn: params.btnFn || [() => {console.log('取消')},() => {console.log('确定')}],
+            btnTxt: params.btnTxt || ["取消", "确定"], // 可不传，默认是取消，确定
+            btnFn: params.btnFn || [() => {console.log("取消")},() => {console.log("确定")}],
             children: params.children
         });
     }
@@ -108,7 +108,7 @@ export class MessageComponent extends Component {
                                 {this.state.children}
                             </div>
                         </div>
-                        { this.state.btnTxt.length > 1 ?
+                        {this.state.btnTxt.length > 1 ?
                             <div className="alert-btn">
                                 <a className="btn-l" href="javascript: void(0)" onClick={this.cancelHandler.bind(this)}>{this.state.btnTxt[0]}</a>
                                 <a className="btn-r" href="javascript: void(0)" onClick={this.okHandler.bind(this)}>{this.state.btnTxt[1]}</a>
@@ -181,20 +181,20 @@ class Message {
     }
 
     render() {
-        if(typeof document == 'undefined'){
+        if(typeof document == "undefined"){
             return "";
         }
 
-        this.node = document.createElement('div');
-        this.node.className = 'global-message-component';
+        this.node = document.createElement("div");
+        this.node.className = "global-message-component";
         document.body.appendChild(this.node);
         render(
             <div>
                 <MessageComponent
-                    ref = { messageRef => this.messageRef = messageRef }
+                    ref={messageRef => this.messageRef = messageRef}
                 />
                 <ToastComponent
-                    ref = { toastRef => this.toastRef = toastRef }
+                    ref={toastRef => this.toastRef = toastRef}
                 />
             </div>,
             this.node

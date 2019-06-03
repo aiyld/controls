@@ -30,6 +30,12 @@ export default class BlurImg extends PureComponent {
         this.setState({isOK: true, src: this.props.src});
     }
 
+    normalError() {
+        if(this.props.onError) {
+            this.props.onError();
+        }
+    }
+
     render() {
         return (
             <div className={"blur-img " + (this.props.className || "")}>
@@ -43,7 +49,7 @@ export default class BlurImg extends PureComponent {
                     ref={normalImg => this.normalImg = normalImg}
                     onLoad={this
                     .normalLoaded
-                    .bind(this)}/>
+                    .bind(this)} onError={this.normalError.bind(this)}/>
                 <div
                     className={"stage " + (this.state.isOK
                     ? ""

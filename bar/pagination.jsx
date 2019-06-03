@@ -5,11 +5,17 @@ export default class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: this.props.page
+      index: props.page
     };
   }
 
   componentDidMount() {}
+
+  componentWillReceiveProps(next, old) {
+    if(next.index !== old.index) {
+      this.setState({index: next.index});
+    }
+  }
 
   onNavigate(index) {
     if(!this.props.urlTem) {
@@ -17,12 +23,6 @@ export default class Pagination extends Component {
       if(this.props.onPageChange) {
         this.props.onPageChange(index);
       }
-    }
-  }
-
-  componentWillReceiveProps(next, old) {
-    if(next.index !== old.index) {
-      this.setState({index: next.index});
     }
   }
 
@@ -92,14 +92,16 @@ export default class Pagination extends Component {
     return pageArr.map((item, i) => {
       return <li className={index === item
         ? "active"
-        : ""} key={i}>
+        : ""} key={i}
+             >
         {item === 0
           ? <a className="unable" href="javascript:void(0)">{ellipsisText}</a>
           : <a
-            href={this.getUrl(item)}
-            onClick={this
+              href={this.getUrl(item)}
+              onClick={this
             .onNavigate
-            .bind(this, item)}>{item}</a>
+            .bind(this, item)}
+            >{item}</a>
 }
       </li>
     });
@@ -114,13 +116,15 @@ export default class Pagination extends Component {
         <ul>
           <li className="pre" onClick={this
             .onPre
-            .bind(this)}>
+            .bind(this)}
+          >
             {index !== 1 ? <a href={this.getUrl(index-1)}>{preText}</a>:<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
           </li>
           {this.generate(index)}
           <li className="next" onClick={this
             .onNext
-            .bind(this)}>
+            .bind(this)}
+          >
             {index !== total && total > 0 ? <a href={this.getUrl(index + 1)}>{nextText}</a>:<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
           </li>
         </ul>

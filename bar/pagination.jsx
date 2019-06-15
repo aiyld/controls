@@ -5,7 +5,7 @@ export default class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: props.page
+      index: props.index
     };
   }
 
@@ -54,7 +54,7 @@ export default class Pagination extends Component {
   }
 
   generate(pageIndex) {
-    const {total, beginIndex, limit, ellipsisText} = this.props;
+    const {total, beginIndex, limit, ellipsisText, template} = this.props;
     let {index} = this.state;
     let pageArr = [];
     let addNum = parseInt(limit / 2);
@@ -96,19 +96,14 @@ export default class Pagination extends Component {
              >
         {item === 0
           ? <a className="unable" href="javascript:void(0)">{ellipsisText}</a>
-          : <a
-              href={this.getUrl(item)}
-              onClick={this
-            .onNavigate
-            .bind(this, item)}
-            >{item}</a>
-}
+          : (template?template(this.getUrl(item), item) : <a href={this.getUrl(item)} onClick={this.onNavigate.bind(this, item)}>{item}</a>)
+        }
       </li>
     });
   }
 
   render() {
-    const {total, preText, nextText, ellipsisText, beginIndex} = this.props;
+    const {total, preText, nextText, template} = this.props;
     let {index} = this.state;
 
     return (
@@ -118,14 +113,14 @@ export default class Pagination extends Component {
             .onPre
             .bind(this)}
           >
-            {index !== 1 ? <a href={this.getUrl(index-1)}>{preText}</a>:<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
+            {index !== 1 ? (template?template(this.getUrl(index-1), preText):<a href={this.getUrl(index-1)}>{preText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
           </li>
           {this.generate(index)}
           <li className="next" onClick={this
             .onNext
             .bind(this)}
           >
-            {index !== total && total > 0 ? <a href={this.getUrl(index + 1)}>{nextText}</a>:<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
+            {index !== total && total > 0 ? (template?template(this.getUrl(index + 1), nextText):<a href={this.getUrl(index + 1)}>{nextText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
           </li>
         </ul>
       </div>
@@ -152,5 +147,5 @@ Pagination.defaultProps = {
   ellipsisText: "...",
   beginIndex: 1,
   urlTem: "", // 替换字符串的[page]
-  page: 1,
+  template: null, // 组件模板
 };

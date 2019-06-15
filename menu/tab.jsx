@@ -71,10 +71,9 @@ export default class Tab extends Component {
                     .onSelectChangeHandler
                     .bind(this, val, i)}>
                     <a href="javascript:void(0)">
-                        <div className={"iconfont " + className}>
-                            <span className="item-msg">{message}</span>
-                            {val.children}
-                        </div>
+                        <i className={"iconfont " + className}></i>
+                        <span className="item-msg">{message}</span>
+                        {val.children}
                     </a>
                 </li>
             })

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {PropTypes} from "prop-types";
 import "./tab.less";
 
@@ -31,7 +31,7 @@ export default class Tab extends Component {
     }
 
     render() {
-        let {items, index} = this.props;
+        let {items, index, template} = this.props;
         let {selectIndex} = this.state;
 
         items = items || [];
@@ -41,7 +41,8 @@ export default class Tab extends Component {
             : "";
 
         return <ul
-            className={"ld ld-tab flexshow " + (this.props.className || "") + className}>
+            className={"ld ld-tab flexshow " + (this.props.className || "") + className}
+               >
             {items.map((val, i) => {
                 let message,
                     className = "",
@@ -64,17 +65,14 @@ export default class Tab extends Component {
                     curClass = "active";
                 }
 
-                return <li
-                    key={i}
-                    className={curClass}
-                    onClick={this
-                    .onSelectChangeHandler
-                    .bind(this, val, i)}>
-                    <a href="javascript:void(0)">
-                        <i className={"iconfont " + className}></i>
-                        <span className="item-msg">{message}</span>
-                        {val.children}
-                    </a>
+                return <li key={i} className={curClass} onClick={this.onSelectChangeHandler.bind(this, val, i)}>
+                    {template ? template(val, i) :
+                        <a href="javascript:void(0)">
+                            <i className={"iconfont " + className}></i>
+                            <span className="item-msg">{message}</span>
+                            {val.children}
+                        </a>
+                    }
                 </li>
             })
 }

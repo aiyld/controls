@@ -103,10 +103,10 @@ export default class Pagination extends Component {
   }
 
   render() {
-    const {total, preText, nextText, template} = this.props;
+    const {total, preText, nextText, template, visible} = this.props;
     let {index} = this.state;
 
-    return (
+    return visible ? (
       <div className="ld ld-pagination">
         <ul>
           <li className="pre" onClick={this
@@ -124,7 +124,7 @@ export default class Pagination extends Component {
           </li>
         </ul>
       </div>
-    );
+    ) : "";
   }
 }
 
@@ -148,4 +148,5 @@ Pagination.defaultProps = {
   beginIndex: 1,
   urlTem: "", // 替换字符串的[page]
   template: null, // 组件模板
+  visible: true,
 };

@@ -96,7 +96,7 @@ export default class Pagination extends Component {
              >
         {item === 0
           ? <a className="unable" href="javascript:void(0)">{ellipsisText}</a>
-          : (template?template(this.getUrl(item), item) : <a href={this.getUrl(item)} onClick={this.onNavigate.bind(this, item)}>{item}</a>)
+          : (template?template(this.getUrl(item), item, item) : <a href={this.getUrl(item)} onClick={this.onNavigate.bind(this, item)}>{item}</a>)
         }
       </li>
     });
@@ -113,14 +113,14 @@ export default class Pagination extends Component {
             .onPre
             .bind(this)}
           >
-            {index !== 1 ? (template?template(this.getUrl(index-1), preText):<a href={this.getUrl(index-1)}>{preText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
+            {index !== 1 ? (template?template(this.getUrl(index-1), preText, index-1):<a href={this.getUrl(index-1)}>{preText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
           </li>
           {this.generate(index)}
           <li className="next" onClick={this
             .onNext
             .bind(this)}
           >
-            {index !== total && total > 0 ? (template?template(this.getUrl(index + 1), nextText):<a href={this.getUrl(index + 1)}>{nextText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
+            {index !== total && total > 0 ? (template?template(this.getUrl(index + 1), nextText, index + 1):<a href={this.getUrl(index + 1)}>{nextText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
           </li>
         </ul>
       </div>

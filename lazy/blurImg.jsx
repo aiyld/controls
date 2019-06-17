@@ -1,7 +1,7 @@
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import "../css/lazy/blurImg.less";
 
-export default class BlurImg extends PureComponent {
+export default class BlurImg extends Component {
     constructor(props) {
         super(props);
 
@@ -27,6 +27,28 @@ export default class BlurImg extends PureComponent {
         if (this.state.src && this.normalImg.complete) {
             this.normalLoaded();
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps) {
+            this.init(nextProps);
+        }
+    }
+
+    init(props) {
+        let {thumb, src} = props;
+        if(!src) {
+            let result = this.dealThumb(thumb);
+            thumb = result.thumb;
+            src = result.src;
+        }
+
+        this.setState({
+            isOK: false,
+            thumb: thumb,
+            src: src,
+            bg: thumb || src,
+        });
     }
 
     thumbLoaded() {

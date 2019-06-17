@@ -4,30 +4,37 @@ import "../css/lazy/blurImg.less";
 export default class BlurImg extends PureComponent {
     constructor(props) {
         super(props);
+
+        let {thumb, src} = props;
+        if(!src) {
+            let result = this.dealThumb(thumb);
+            thumb = result.thumb;
+            src = result.src;
+        }
         this.state = {
             isOK: false,
-            src: ""
+            thumb: thumb,
+            src: src,
+            bg: thumb || src,
         };
     }
 
     componentDidMount() {
-        if (!this.props.thumb) {
-            this.normalImg.src = "";
-            this.normalImg.src = this.props.src;
-            this.setState({isOK: true, src: this.props.src});
-        } else {
-            this.thumbImg.src = "";
-            this.thumbImg.src = this.props.thumb;
-            this.setState({src: this.props.thumb});
+        if (this.state.thumb && this.thumbImg.complete) {
+            this.thumbLoaded();
+        }
+
+        if (this.state.src && this.normalImg.complete) {
+            this.normalLoaded();
         }
     }
 
     thumbLoaded() {
-        this.normalImg.src = this.props.src;
+        this.normalImg.src = this.state.src;
     }
 
     normalLoaded() {
-        this.setState({isOK: true, src: this.props.src});
+        this.setState({isOK: true, bg: this.state.src});
     }
 
     normalError() {
@@ -36,27 +43,48 @@ export default class BlurImg extends PureComponent {
         }
     }
 
+    dealThumb(src) {
+        let thumb = "";
+        let origin = "";
+
+        let {getSrc} = this.props;
+
+        if(getSrc) {
+            thumb = src;
+            origin = getSrc(thumb);
+        } else {
+            if (src.indexOf("/thumbnails/") >= 0) {
+                thumb = src;
+                origin = src.replace(/\/thumbnails\//, "/")
+            } else {
+                origin = src;
+            }
+        }
+
+        return {
+          thumb,
+          src: origin
+        }
+    }
+
     render() {
         return (
             <div className={"blur-img " + (this.props.className || "")}>
                 <img
                     ref={thumbImg => this.thumbImg = thumbImg}
-                    src={this.props.thumb || ""}
-                    onLoad={this
-                    .thumbLoaded
-                    .bind(this)}></img>
-                <img
+                    src={this.state.thumb || ""}
+                    onLoad={this.thumbLoaded.bind(this)}
+                ></img>
+                <img src={this.state.thumb ? "" : this.state.src}
                     ref={normalImg => this.normalImg = normalImg}
-                    onLoad={this
-                    .normalLoaded
-                    .bind(this)} onError={this.normalError.bind(this)}/>
+                    onLoad={this.normalLoaded.bind(this)}
+                    onError={this.normalError.bind(this)}
+                />
                 <div
-                    className={"stage " + (this.state.isOK
-                    ? ""
-                    : "blur")}
-                    style={{
-                    backgroundImage: `url(${this.state.src})`
-                }}></div>
+                    className={"stage " + (this.state.isOK ? "": "blur")}
+                    style={{backgroundImage: `url(${this.state.bg})`
+                }}
+                ></div>
             </div>
         );
     }

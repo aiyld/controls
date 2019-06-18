@@ -36,6 +36,12 @@ export default class BlurImg extends Component {
     }
 
     init(props) {
+        this.setState({
+            isOK: false,
+            thumb: "",
+            src: "",
+            bg: "",
+        });
         let {thumb, src} = props;
         if(!src) {
             let result = this.dealThumb(thumb);
@@ -43,12 +49,14 @@ export default class BlurImg extends Component {
             src = result.src;
         }
 
-        this.setState({
-            isOK: false,
-            thumb: thumb,
-            src: src,
-            bg: thumb || src,
-        });
+        setTimeout(()=>{
+            this.setState({
+                isOK: false,
+                thumb: thumb,
+                src: src,
+                bg: thumb || src,
+            });
+        }, 100)
     }
 
     thumbLoaded() {

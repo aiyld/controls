@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
 import "./pagination.less";
 
 export default class Pagination extends Component {
@@ -11,7 +11,7 @@ export default class Pagination extends Component {
 
   componentDidMount() {}
 
-  componentWillReceiveProps(next, old) {
+  UNSAFE_componentWillReceiveProps(next, old) {
     if(next.index !== old.index) {
       this.setState({index: next.index});
     }
@@ -27,6 +27,9 @@ export default class Pagination extends Component {
   }
 
   onPre() {
+    if(this.props.template || this.props.urlTem) {
+      return;
+    }
     let {index} = this.state;
     let {beginIndex} = this.props;
     if (index > beginIndex) {
@@ -36,8 +39,11 @@ export default class Pagination extends Component {
   }
 
   onNext() {
+    if(this.props.template || this.props.urlTem) {
+      return;
+    }
     let {index} = this.state;
-    let {total, beginIndex} = this.props;
+    let {total} = this.props;
     if (index < total || total === -1) {
       index++;
       this.onNavigate(index);
@@ -53,7 +59,7 @@ export default class Pagination extends Component {
     }
   }
 
-  generate(pageIndex) {
+  generate() {
     const {total, beginIndex, limit, ellipsisText, template} = this.props;
     let {index} = this.state;
     let pageArr = [];
@@ -109,17 +115,11 @@ export default class Pagination extends Component {
     return visible ? (
       <div className="ld ld-pagination">
         <ul>
-          <li className="pre" onClick={this
-            .onPre
-            .bind(this)}
-          >
+          <li className="pre" onClick={this.onPre.bind(this)}>
             {index !== 1 ? (template?template(this.getUrl(index-1), preText, index-1):<a href={this.getUrl(index-1)}>{preText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{preText}</a>}
           </li>
           {this.generate(index)}
-          <li className="next" onClick={this
-            .onNext
-            .bind(this)}
-          >
+          <li className="next" onClick={this.onNext.bind(this)}>
             {index !== total && total > 0 ? (template?template(this.getUrl(index + 1), nextText, index + 1):<a href={this.getUrl(index + 1)}>{nextText}</a>):<a href="javascript:void(0)" disabled="disabled" className="disable">{nextText}</a>}
           </li>
         </ul>

@@ -29,10 +29,8 @@ export default class BlurImg extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps) {
-            this.init(nextProps);
-        }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        this.init(nextProps);
     }
 
     init(props) {

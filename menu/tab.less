@@ -38,6 +38,11 @@
                     }
                     background-color: rgba(240, 240, 240, 0.8);
                 }
+                &:first-child {
+                    a {
+                        margin-left: 20px;
+                    }
+                }
             }
 
             li:last-child{
@@ -45,13 +50,14 @@
             }
         }
         a {
-            padding: 13px 20px;
+            padding: 13px 0px;
             font-size: 15px;
             font-weight: 400;
             color: #505050;
             line-height: 25px;
             cursor: pointer;
             text-decoration: none;
+            margin-left: 20px;
         }
         .iconfont {
             display: inline-block;
@@ -64,6 +70,11 @@
             line-height: 20px;
             &.active {
                 border-bottom: 2px solid #646464;
+            }
+            &:first-child {
+                a {
+                    margin-left: 0;
+                }
             }
         }
         li:after {

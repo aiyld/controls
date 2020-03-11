@@ -142,8 +142,8 @@ Pagination.calTotalPage = (recordsLength, pageSize) => {
 Pagination.defaultProps = {
   limit: 5, // 共展示五位数字
   total: -1, // 总共页数
-  preText: "上一页",
-  nextText: "下一页",
+  preText: "<",
+  nextText: ">",
   ellipsisText: "...",
   beginIndex: 1,
   urlTem: "", // 替换字符串的[page]

@@ -27,6 +27,14 @@ export default class BlurImg extends Component {
         if (this.state.src && this.normalImg && this.normalImg.complete) {
             this.normalLoaded();
         }
+
+        if (this.state.thumb && this.state.thumb) {
+            const img = new Image();
+            img.onload = () => {
+                this.thumbLoaded();
+            };
+            img.src = this.state.thumb;
+        }
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {

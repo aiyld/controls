@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {PropTypes} from "prop-types";
 import "./circleButton.less";
 
@@ -17,7 +17,7 @@ export default class CircleButton extends Component {
 
         let img;
         if(src){
-            img = <img height={height} className="" src={src}/>;
+            img = <img style={{height:height}} className="" src={src}/>;
         }
 
         let obj;
